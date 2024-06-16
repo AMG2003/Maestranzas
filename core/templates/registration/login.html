@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingreso al Sistema</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    {% block icon %}<link rel="icon" type="image/x-icon" href="{% static 'core/img/account.png' %}"> {% endblock icon %}
+</head>
+<body>
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h2>Ingresa tus credenciales</h2>
+                        <hr>
+                        <form action="" method="post">
+
+                            {% csrf_token %}
+                            {% if messages %}
+                            {% for mensaje in messages %}
+                            <span class="alert alert-{{mensaje.tags}}">{{mensaje}}</span>
+
+                            
+
+                            {% endfor %}
+                            {% endif %}
+                            {{ form | crispy }}
+                            <a href="{% url 'home' %}">Ir al home</a> | 
+                            <a href="{% url 'registro' %}">Registrate</a>
+                            <input type="submit" value="ingresar" class="btn btn-success float-right">
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

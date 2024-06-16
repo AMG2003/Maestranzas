@@ -355,11 +355,15 @@ footer .container{
     .form-inline{
         transform: translateX(0%);
     }
-    
+
 }
 
 .bi{
     font-size: x-large;
     padding: 10px;
     color: black;
+}
+
+#menu{
+    margin-right: 10px;
 }
