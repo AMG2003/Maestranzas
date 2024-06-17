@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Piezas</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1>Lista de Piezas</h1>
+    <table class="table table-striped">
+        <thead>
+            <th>ID</th>
+            <th>Descripción:</th>
+            <th>Número de Serie:</th>
+            <th>Ubicación: </th>
+            <th>Disponibles:</th>
+            <th>Cantidad Mínima</th>
+            <th>Fecha de Registro:</th>
+
+        </thead>
+
+        <tbody>
+            {% for pieza in piezas %}
+            <tr>
+                <td>{{ pieza.id }}</td>
+                <td>{{ pieza.descripcion }}</td>
+                <td>({{ pieza.numero_serie }})</td>
+                <td>{{ pieza.ubicacion }}</td>
+                <td>{{ pieza.cantidad_disponible }}</td>
+                <td>{{ pieza.cantidad_minima }}</td>
+                <td>{{ pieza.fecha_registro }}</td>
+                <td>
+                    <a href="" class="btn btn-primary">Modificar</a>
+                    <a href="" class="btn btn-danger">Eliminar</a>
+                </td>
+
+            </tr>
+
+
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock content %}
+
+    {% block footer %}
+    {% endblock footer %}
+</body>
+
+</html>

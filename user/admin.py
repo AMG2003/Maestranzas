@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Pieza
+from .models import User
 
 # Register your models here.
-admin.site.register(Pieza)
+
+admin.site.register(User)
