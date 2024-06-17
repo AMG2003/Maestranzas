@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Perfil {% endblock title %}
+
+</head>
+
+<body>
+    {% block content %}
+    {% if user.is_authenticated %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{user.picture.url}}" alt="Card image cap">
+                    <div class="card-body">
+                        <h6 class="card-title">Nombre de Usuario: {{user.username | upper}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="card-title">Nombre: {{user.first_name | upper}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="card-title">Apellido: {{user.last_name | upper}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="card-title">Correo: {{user.email | upper}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <h6><i class="bi bi-geo-alt-fill"></i> Dirección: {{user.location}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <h6 class="card-text">Fecha Registro: {{user.date_joined}}</h6>
+                        <div class="dropdown-divider"></div>
+                        <p class="card-text"> Descripción: {{user.bio}}</p>
+                        <a href="" class="btn btn-sm btn-success">Modificar Perfil</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h4>Título Cualquiera</h4>
+                <p>{% lorem %}</p>
+            </div>
+        </div>
+        {% else %}
+        <h4>Título cualquiera</h4>
+        <p>{% lorem %}</p>
+    </div>
+
+    {% endif %}
+    {% endblock content %}
+
+    {% block footer %}
+    {% endblock footer %}
+
+</body>
+
+</html>
