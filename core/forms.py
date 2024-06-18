@@ -12,5 +12,15 @@ class CustomUserCreationForm(UserCreationForm):
 class PiezaForm(forms.ModelForm):
     class Meta:
         model = Pieza
-        fields = ['descripcion','numero_serie','ubicacion', 'cantidad_disponible', 'cantidad_minima']
+        fields = ['descripcion','numero_serie','ubicacion', 'cantidad_disponible', 'cantidad_minima','precio_unitario']
         exclude = ['fecha_registro']
+
+    def clean(self):
+        cleaned_data = super().clean()
+        cantidad_disponible = cleaned_data.get('cantidad_disponible')
+        cantidad_minima = cleaned_data.get('cantidad_minima')
+
+        if cantidad_minima > cantidad_disponible:
+            raise forms.ValidationError("La cantidad mínima no puede ser mayor que la cantidad disponible.")
+        
+        return cleaned_data

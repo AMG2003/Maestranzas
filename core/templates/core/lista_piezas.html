@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Piezas</title>
+    {% block title %} Lista de Piezas {% endblock title %}
 </head>
 
 <body>
@@ -20,6 +20,7 @@
             <th>Ubicación: </th>
             <th>Disponibles:</th>
             <th>Cantidad Mínima</th>
+            <th>Precio Unitario:</th>
             <th>Fecha de Registro:</th>
 
         </thead>
@@ -33,10 +34,11 @@
                 <td>{{ pieza.ubicacion }}</td>
                 <td>{{ pieza.cantidad_disponible }}</td>
                 <td>{{ pieza.cantidad_minima }}</td>
+                <td>{{ pieza.precio_unitario }}</td>
                 <td>{{ pieza.fecha_registro }}</td>
                 <td>
                     <a href="" class="btn btn-primary">Modificar</a>
-                    <a href="" class="btn btn-danger">Eliminar</a>
+                    <a href="{% url 'eliminar_pieza' pieza.id %}" class="btn btn-danger">Eliminar</a>
                 </td>
 
             </tr>
@@ -45,6 +47,70 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {% if piezas.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1" aria-label="First">
+                <span aria-hidden="true">&laquo; Primera</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ piezas.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">Anterior</span>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-label="First">
+                <span aria-hidden="true">&laquo; Primera</span>
+              </a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-label="Previous">
+                <span aria-hidden="true">Anterior</span>
+              </a>
+            </li>
+          {% endif %}
+      
+          {% for num in piezas.paginator.page_range %}
+            {% if piezas.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}<span class="sr-only">(current)</span></span>
+              </li>
+            {% elif num > piezas.number|add:'-3' and num < piezas.number|add:'3' %}
+              <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+            {% endif %}
+          {% endfor %}
+      
+          {% if piezas.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ piezas.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true">Siguiente</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="?page={{ piezas.paginator.num_pages }}" aria-label="Last">
+                <span aria-hidden="true">Última &raquo;</span>
+              </a>
+            </li>
+          {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-label="Next">
+                <span aria-hidden="true">Siguiente</span>
+              </a>
+            </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-label="Last">
+                <span aria-hidden="true">Última &raquo;</span>
+              </a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+      
+    <a href="{% url 'registrar_pieza' %}" class="btn btn-primary">Registrar Nueva Pieza</a>
     {% endblock content %}
 
     {% block footer %}
