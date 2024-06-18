@@ -1,0 +1,48 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    <h1 style="text-align: center;">Detalle de la Pieza</h1>
+
+    <div class="conatiner">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card" style="width: 18rem;">
+                    <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Descripción: {{ pieza.descripcion }}</li>
+                        <li class="list-group-item">Número de Serie: {{ pieza.numero_serie }}</li>
+                        <li class="list-group-item">Ubicación: {{ pieza.ubicacion }}</li>
+                        <li class="list-group-item">Cantidad Disponible: {{ pieza.cantidad_disponible }}</li>
+                        <li class="list-group-item">Precio Unitario: ${{ pieza.precio_unitario|floatformat:"0" }}</li>
+                    </ul>
+                    <div class="card-body" style="text-align: center; padding: 15px;">
+                        <a href="{% url 'piezas' %} " class="btn btn-primary" style="margin: 10px;">Volver al Catálogo</a>
+                        <a href="" class="btn btn-primary disabled">Agregar al Carrito</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+    {% endblock content %}
+</body>
+
+</html>

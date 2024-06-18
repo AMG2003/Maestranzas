@@ -1,0 +1,47 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Piezas {% endblock title %}
+</head>
+
+<body>
+    {% block content %}
+    <h1>Piezas</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {% for pieza in pieza %}
+                <div class="card" style="width: 18rem;">
+                    <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                      <h5 class="card-title" style="text-align: center;"><a href="{% url 'detalle_pieza' pieza.id %}">{{ pieza.descripcion }}</a></h5>
+                      
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Número de Serie: {{ pieza.numero_serie }}</li>
+                      
+                      
+                      <li class="list-group-item">Precio Unitario: ${{ pieza.precio_unitario|floatformat:"0"  }}</li>
+                    </ul>
+                    <div class="card-body" style="text-align: center; padding: 10px;">
+                        <a href="{% url 'detalle_pieza' pieza.id %} "class="btn btn-primary">Ver Detalles</a>
+                        <a href=""class="btn btn-primary disabled">Agregar al Carrito</a>
+                    </div>
+                  </div>
+                {% endfor %}
+
+            </div>
+        </div>
+
+    </div>
+
+    {% endblock content %}
+</body>
+
+</html>
