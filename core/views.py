@@ -1,43 +1,59 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib.auth import logout
+from django.contrib.auth import login, authenticate, logout
 from django import forms
-from .forms import CustomUserCreationForm
+from .forms import UsuarioCreationForm, UsuarioLoginForm
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
 from .models import Pieza
 from .forms import PiezaForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from carro.carro import Carro
 # Create your views here.
 def home(request):
+    carro = Carro(request)
     return render(request, "core/home.html")
 def base(request):
     return render(request, "core/base.html")
 
-def exit(request):
+def logout_usuario(request):
     logout(request)
     return redirect('home')
 
-def registro(request):
-    data = {"form": CustomUserCreationForm()}
-
+def registro_usuario(request):
     if request.method == "POST":
-        formulario = CustomUserCreationForm(data=request.POST)
+        formulario = UsuarioCreationForm(request.POST)
         if formulario.is_valid():
-            formulario.save()
-            user = authenticate(
-                username=formulario.cleaned_data["username"],
-                password=formulario.cleaned_data["password1"],
-            )
+            user = formulario.save(commit=False)
+            user.set_password(formulario.cleaned_data['password'])
+            user.save()
             login(request, user)
             messages.success(request, "Te has registrado correctamente")
             return redirect(to="home")
-        data["form"] = formulario
+        else:
+            return render(request, "registration/registro.html", {'formulario': formulario})
+    else:
+        formulario = UsuarioCreationForm()
+    return render(request, "registration/registro.html", {'formulario': formulario})
 
-    return render(request, "registration/registro.html", data)
+def login_usuario(request):
+    if request.method == 'POST':
+        formulario = UsuarioLoginForm(request, data = request.POST)
+        if formulario.is_valid():
+            email = formulario.cleaned_data.get('username')
+            contraseña = formulario.cleaned_data.get('password')
+            user = authenticate(request, email=email, password=contraseña)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+    else:
+        formulario = UsuarioLoginForm()
+    return render(request, 'login.html', {'formulario': formulario})
+    
 @login_required
 def perfil(request):
     return render(request, "core/perfil.html")
+
 @login_required
 def registrar_pieza(request):
     if request.method == 'POST':
@@ -50,6 +66,7 @@ def registrar_pieza(request):
     else:
         form = PiezaForm()
     return render(request, 'core/registrar_pieza.html', {'form': form})
+
 @login_required
 def lista_piezas(request):
     piezas = Pieza.objects.all()
@@ -76,5 +93,16 @@ def eliminar_pieza(request,id):
 def detalle_pieza(request, pieza_id):
     pieza = get_object_or_404(Pieza, id=pieza_id)
     return render(request, 'core/detalle_pieza.html', {'pieza': pieza})
+
+def carrito(request):
+    return render(request, 'core/carrito.html')
+
+def calculate_shopping_cart_total(request):
+    total = 0
+    if request.user.is_authenticated:
+        for key, value in request.session.get("carro", {}).items():
+            total += float(value.get("precio_unitario",0))
+    return total
+
 
     

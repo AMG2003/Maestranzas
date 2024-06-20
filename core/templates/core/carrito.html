@@ -1,0 +1,40 @@
+{% extends "core/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    Carrito
+    {% endblock %}
+    <link rel="stylesheet" href="{% static 'core/css/carrito.css' %}">
+
+</head>
+
+<body>
+    
+
+    {% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+                {% if request.user.is_authenticated %}
+
+                {% include "carro/widget.html" %}
+                {% else %}
+                <div class="alert alert-danger text-center">
+                    Debes hacer login para ver carro
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+
+</body>
+
+</html>

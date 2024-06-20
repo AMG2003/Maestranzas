@@ -18,7 +18,8 @@
 
     <div class="container-fluid">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'core/img/Logo.jpg' %}" alt="" width="100px"></a>
+            <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'core/img/Logo.jpg' %}" alt=""
+                    width="100px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,7 +57,8 @@
                     </li>
                 </ul>
                 <form method="GET" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" name="q" value="{{ query }}" type="search" placeholder="Buscar" aria-label="Search">
+                    <input class="form-control mr-sm-2" name="q" value="{{ query }}" type="search" placeholder="Buscar"
+                        aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
                 </form>
 
@@ -66,9 +68,9 @@
                     </a>
                     {% if user.is_authenticated %}
                     <div class="dropdown-menu">
-                        <h6 style="text-align: center;">Bienvenido | {{user.username}}</h6>
-                        <a class="dropdown-item" href="{% url 'perfil' %}">Ver Perfil</a>
-                        <a class="dropdown-item" href="{% url 'exit' %}">Cerrar Sesión</a>
+                        <h6 style="text-align: center;">Bienvenido | {{user.nombre}}</h6>
+                        <a class="dropdown-item" href="{% url 'perfil' %}"><i class="bi bi-person"></i>Ver Perfil</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>Cerrar Sesión</a>
                     </div>
                     {%else%}
                     <div class="dropdown-menu">
@@ -79,17 +81,21 @@
                     {% endif %}
                 </li>
 
-                <a href=""><i class="bi bi-cart"></i></a>
+                <a href="{% url 'carrito' %}"><i class="bi bi-cart"></i></a>
+                {% if contador_productos > 0 %}
+                <span class="badge badge-pill badge-primary">{{ contador_productos }}</span>
+                {% endif %}
+
 
             </div>
 
         </nav>
 
-{% block content %}
+        {% block content %}
 
     </div>
 
-    
+
 
     <section id="hero"><img src="[% static 'core/img/Logo.jpg' %]" alt="">
         <h1>Compra los mejores <br>productos de maestranza <br>por los mejores precios</h1>
