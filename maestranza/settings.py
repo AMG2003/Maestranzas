@@ -71,7 +71,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'carro.context_processor.importe_total_carro',
+                'carro.context_processor.importe_total_carro',
+                'carro.context_processor.contador_productos',
             ],
         },
     },
@@ -152,4 +153,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
-AUTH_USER_MODEL = 'user.User'
+AUTH_USER_MODEL = 'core.Usuario'

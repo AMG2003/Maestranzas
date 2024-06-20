@@ -17,21 +17,23 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{user.picture.url}}" alt="Card image cap">
+                    <img class="card-img-top" src="{{user.imagen_perfil.url}}" alt="Card image cap">
                     <div class="card-body">
-                        <h6 class="card-title">Nombre de Usuario: {{user.username | upper}}</h6>
+                        
                         <div class="dropdown-divider"></div>
-                        <h6 class="card-title">Nombre: {{user.first_name | upper}}</h6>
+                        <h6 class="card-title">Nombre: {{user.nombre | upper}}</h6>
                         <div class="dropdown-divider"></div>
-                        <h6 class="card-title">Apellido: {{user.last_name | upper}}</h6>
+                        <h6 class="card-title">Apellido: {{user.apellido | upper}}</h6>
                         <div class="dropdown-divider"></div>
-                        <h6 class="card-title">Correo: {{user.email | upper}}</h6>
+                        <h6 class="card-title"><i class="bi bi-people"></i>Rol: {{user.rol}}</h6>
                         <div class="dropdown-divider"></div>
-                        <h6><i class="bi bi-geo-alt-fill"></i> Dirección: {{user.location}}</h6>
+                        <h6 class="card-title"><i class="bi bi-envelope-at"></i>Correo: {{user.email | upper}}</h6>
                         <div class="dropdown-divider"></div>
-                        <h6 class="card-text">Fecha Registro: {{user.date_joined}}</h6>
+                        <h6><i class="bi bi-phone"></i> Teléfono: {{user.telefono}}</h6>
                         <div class="dropdown-divider"></div>
-                        <p class="card-text"> Descripción: {{user.bio}}</p>
+                        <h6 class="card-text"><i class="bi bi-calendar"></i>Fecha Registro: {{user.fecha_registro}}</h6>
+                        <div class="dropdown-divider"></div>
+
                         <a href="" class="btn btn-sm btn-success">Modificar Perfil</a>
                     </div>
                 </div>
