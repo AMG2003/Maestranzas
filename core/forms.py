@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Pieza, Usuario
+from django.core.exceptions import ValidationError
 
 class UsuarioCreationForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder':'Contraseña'}),label="Contraseña")
@@ -26,6 +27,12 @@ class UsuarioCreationForm(forms.ModelForm):
             'password': forms.PasswordInput(),
             'password_confirm': forms.PasswordInput(),
         }
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if Usuario.objects.filter(email = email).exists():
+            raise ValidationError("Este correo electrónico ya está registrado.")
+        return email
         
     def clean(self):
         cleaned_data = super().clean()
@@ -50,8 +57,17 @@ class UsuarioLoginForm(AuthenticationForm):
 class PiezaForm(forms.ModelForm):
     class Meta:
         model = Pieza
-        fields = ['descripcion','numero_serie','ubicacion', 'cantidad_disponible', 'cantidad_minima','precio_unitario']
+        fields = ['descripcion','numero_serie','ubicacion', 'cantidad_disponible', 'cantidad_minima','precio_unitario', 'imagen_pieza']
         exclude = ['fecha_registro']
+        widgets = {
+            'descripcion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Descripción'}),
+            'numero_serie': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Número de Serie'}),
+            'ubicacion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ubicación'}),
+            'cantidad_disponible': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Cantidad Disponible'}),
+            'cantidad_minima': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Cantidad Mínima'}),
+            'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Precio Unitario'}),
+            'imagen_pieza': forms.ClearableFileInput(attrs={'class': 'form-control', 'onchange': 'previewImage(event, "output_image")'}),
+        }
 
     def clean(self):
         cleaned_data = super().clean()

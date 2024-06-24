@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load humanize %}
 <html lang="en">
 
 <head>
@@ -38,14 +39,14 @@
                         <tr class="text-center">
                             <!-- <td><img src="" alt="Sin Imagen" style="width: 19%;" height="100%"></td> -->
                             <td>{{value.descripcion}}</td>
-                            <td>{{value.cantidad}}</td>
+                            <td>{{value.cantidad|intcomma}}</td>
                             <td>
                                 <a href="{% url 'carro:agregar' value.pieza_id %}" class="btn btn-sm btn-success"
                                     style="background-color: green;">+</a>
                                 <a href="{% url 'carro:restar' value.pieza_id %}" class="btn btn-sm btn-success"
                                     style="background-color: green;">-</a><br>
 
-                                $ {{value.precio_unitario}}
+                                $ {{value.precio_unitario|floatformat:"0"|intcomma}}
                             </td>
                         </tr>
 
@@ -64,7 +65,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="3">
-                                Total: $ {{importe_total_carro}}
+                                Total: $ {{importe_total_carro|floatformat:"0"|intcomma}}
                             </td>
                         </tr>
                         {% if request.session.carro.items %}

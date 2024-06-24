@@ -31,6 +31,7 @@ def registro_usuario(request):
             messages.success(request, "Te has registrado correctamente")
             return redirect(to="home")
         else:
+            messages.error(request,'Corrige los errores a continuación.')
             return render(request, "registration/registro.html", {'formulario': formulario})
     else:
         formulario = UsuarioCreationForm()
@@ -57,7 +58,7 @@ def perfil(request):
 @login_required
 def registrar_pieza(request):
     if request.method == 'POST':
-        form = PiezaForm(request.POST)
+        form = PiezaForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             return redirect('lista_piezas')

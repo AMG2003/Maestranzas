@@ -33,25 +33,26 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'piezas' %}">Nuestros mejores Productos</a>
                     </li>
+                    {% if perms.core.view_pieza %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                             aria-expanded="false">
                             Características
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <!-- <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            {% if perms.core.view_pieza %}
+                            <a class="dropdown-item" href="#">Something else here</a> -->
+                            <!-- <div class="dropdown-divider"></div> -->
                             <h5 style="text-align: center;">Administración</h5>
                             <a class="dropdown-item" href="{% url 'registrar_pieza' %}">Registrar Piezas</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{% url 'lista_piezas' %}">Listar Piezas</a>
-                            {% endif %}
+
                         </div>
                     </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="nav-link disabled">Desactivado</a>
                     </li>
@@ -70,7 +71,8 @@
                     <div class="dropdown-menu">
                         <h6 style="text-align: center;">Bienvenido | {{user.nombre}}</h6>
                         <a class="dropdown-item" href="{% url 'perfil' %}"><i class="bi bi-person"></i>Ver Perfil</a>
-                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>Cerrar Sesión</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}"><i class="bi bi-box-arrow-right"></i>Cerrar
+                            Sesión</a>
                     </div>
                     {%else%}
                     <div class="dropdown-menu">
@@ -93,6 +95,14 @@
 
         {% block content %}
 
+    </div>
+
+    <div style="text-align: center;">
+        {% if messages %}
+        {% for mensaje in messages %}
+        <span class="alert alert-{{mensaje.tags}}">{{mensaje}}</span>
+        {% endfor %}
+        {% endif %}
     </div>
 
 
@@ -152,6 +162,8 @@
         <a href="#">Aviso Legal</a>
     </footer>
     {% endblock footer %}
+
+    <script src="{% static 'core/js/home.js' %}"></script>
 
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"

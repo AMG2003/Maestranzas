@@ -1,5 +1,6 @@
 {% extends "core/base.html" %}
 {% load static %}
+{% load humanize %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,6 +16,7 @@
     <table class="table table-striped">
         <thead>
             <th>ID</th>
+            <th>Imagen:</th>
             <th>Descripción:</th>
             <th>Número de Serie:</th>
             <th>Ubicación: </th>
@@ -29,12 +31,13 @@
             {% for pieza in piezas %}
             <tr>
                 <td>{{ pieza.id }}</td>
+                <td>{{ pieza.imagen_pieza }}</td>
                 <td>{{ pieza.descripcion }}</td>
                 <td>({{ pieza.numero_serie }})</td>
                 <td>{{ pieza.ubicacion }}</td>
-                <td>{{ pieza.cantidad_disponible }}</td>
-                <td>{{ pieza.cantidad_minima }}</td>
-                <td>{{ pieza.precio_unitario }}</td>
+                <td>{{ pieza.cantidad_disponible|intcomma }}</td>
+                <td>{{ pieza.cantidad_minima|intcomma }}</td>
+                <td>$ {{ pieza.precio_unitario|floatformat:"0"|intcomma }}</td>
                 <td>{{ pieza.fecha_registro }}</td>
                 <td>
                     <a href="" class="btn btn-primary">Modificar</a>
