@@ -367,3 +367,13 @@ footer .container{
 #menu{
     margin-right: 50px;
 }
+
+.card{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 110%;
+    padding: 10px;
+}
+.card-img-top{
+    height: 200px;
+}

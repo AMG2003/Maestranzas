@@ -15,35 +15,35 @@
     <h1>Piezas</h1>
 
     <div class="container">
-        <div class="row">
-            <div class="col">
-                {% for pieza in pieza %}
-                <div class="card" style="width: 18rem;">
+        <div class="row justify-content-center">
+            {% for pieza in pieza %}
+            <div class="col-11 col-sm-12 col-md-6 col-lg-3 offset-lg-1 ml-lg-5 h-50">
+                <div class="card" style="width: 20rem;">
                     {% if pieza.imagen_pieza %}
                     <img class="card-img-top" src="{{ pieza.imagen_pieza.url }}" alt="Card image cap">
                     {% endif %}
                     <div class="card-body">
-                      <h5 class="card-title" style="text-align: center;"><a href="{% url 'detalle_pieza' pieza.id %}">{{ pieza.descripcion }}</a></h5>
-                      
+                        <h5 class="card-title" style="text-align: center; text-decoration: none; color: black;"><a
+                                href="{% url 'detalle_pieza' pieza.id %}">{{ pieza.descripcion }}</a></h5>
+
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Número de Serie: {{ pieza.numero_serie }}</li>
-                      
-                      
-                      <li class="list-group-item">Precio Unitario: $ {{ pieza.precio_unitario|floatformat:"0"|intcomma  }}</li>
+                        <li class="list-group-item">Número de Serie: {{ pieza.numero_serie }}</li>
+
+
+                        <li class="list-group-item">Precio Unitario: $ {{ pieza.precio_unitario|floatformat:"0"|intcomma}}</li>
                     </ul>
                     <div class="card-body" style="text-align: center; padding: 10px;">
-                        <a href="{% url 'detalle_pieza' pieza.id %} "class="btn btn-primary">Ver Detalles</a>
-                        <a href="{% url 'carro:agregar' pieza.id %}"class="btn btn-primary">Agregar al Carrito</a>
+                        <a href="{% url 'detalle_pieza' pieza.id %} " class="btn btn-primary">Ver Detalles</a>
+                        <a href="{% url 'carro:agregar' pieza.id %}" class="btn btn-primary">Agregar al Carrito</a>
                     </div>
-                  </div>
-                {% endfor %}
-
+                </div>
             </div>
+            {% endfor %}
         </div>
 
     </div>
-    
+
 
     {% endblock content %}
 </body>

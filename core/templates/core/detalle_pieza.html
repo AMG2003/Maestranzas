@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    {% block title %} Detalle de Pieza {% endblock title %}
 </head>
 
 <body>
@@ -17,7 +17,7 @@
     <div class="conatiner">
         <div class="row justify-content-center">
             <div class="col-md-3">
-                <div class="card" style="width: 18rem;">
+                <div class="card" style="width: 18rem; height: 40%;">
                     {% if pieza.imagen_pieza %}
                     <img class="card-img-top" src="{{ pieza.imagen_pieza.url }}" alt="Card image cap">
                     {% endif %}
