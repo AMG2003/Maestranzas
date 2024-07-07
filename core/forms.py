@@ -57,7 +57,7 @@ class UsuarioLoginForm(AuthenticationForm):
 class PiezaForm(forms.ModelForm):
     class Meta:
         model = Pieza
-        fields = ['descripcion','numero_serie','ubicacion', 'cantidad_disponible', 'cantidad_minima','precio_unitario', 'imagen_pieza']
+        fields = ['descripcion','numero_serie','ubicacion', 'cantidad_disponible', 'cantidad_minima','categoria_producto','precio_unitario', 'imagen_pieza']
         exclude = ['fecha_registro']
         widgets = {
             'descripcion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Descripción'}),
@@ -65,6 +65,7 @@ class PiezaForm(forms.ModelForm):
             'ubicacion': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ubicación'}),
             'cantidad_disponible': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Cantidad Disponible'}),
             'cantidad_minima': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Cantidad Mínima'}),
+            'categoria_producto':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Categoria'}),
             'precio_unitario': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Precio Unitario'}),
             'imagen_pieza': forms.ClearableFileInput(attrs={'class': 'form-control', 'onchange': 'previewImage(event, "output_image")'}),
         }
