@@ -1,0 +1,69 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Modificar Usuario {% endblock title %}
+</head>
+
+<body>
+    {% block content %}
+    <div class="container" style="padding: 15px;">
+        <a href="{% url 'lista_usuarios' %}"><i class="bi bi-arrow-left-circle"></i></a>
+        <div class="row justify-content-center">
+
+            <div class="col col-lg-6" style="border: 1px; border-style:groove; border-radius: 5px;">
+
+                <h1 style="text-align: center;">Modificar Usuario</h1>
+
+
+                <form action="{% url 'datos_user' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="id" value="{{ datos.id }}">
+                    <div>
+                        <label for="">Nombre:</label>
+                        <input class="form-control" id="nombre" value="{{ datos.nombre }}" type="text" name="nombre" maxlength="25">
+                    </div>
+                    <div>
+                        <label for="">Apellido:</label>
+                        <input class="form-control" id="apellido" value="{{ datos.apellido }}" type="text" maxlength="25"
+                            name="apellido">
+                    </div>
+                    <div>
+                        <label for="">Email:</label>
+                        <input class="form-control" id="email" value="{{ datos.email }}" type="email" name="email" maxlength="25">
+                    </div>
+                    <div>
+                        <label for="">Teléfono:</label>
+                        <input class="form-control" id="telefono" value="{{ datos.telefono }}" type="numeric" maxlength="9"
+                            name="telefono">
+                    </div>
+                    <div>
+                        <label for="rol">Rol:</label> <br>
+                        <select id="rol" name="rol">
+                            {% for valor, nombre in roles %}
+
+                            <option value="{{ valor }}" {% if datos.rol == valor %}selected{% endif %}>{{ nombre }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Foto:</label>
+                        <input class="form-control" id="foto" type="file" name="foto">
+                    </div>
+                    <div style="padding: 10px; text-align: center;">
+                        <button type="submit">Modificar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}
+</body>
+
+</html>
