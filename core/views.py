@@ -4,7 +4,7 @@ from django import forms
 from .forms import UsuarioCreationForm, UsuarioLoginForm
 from django.contrib.auth import authenticate,login
 from django.contrib import messages
-from .models import Pieza
+from .models import Pieza, Usuario
 from .forms import PiezaForm
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
@@ -19,6 +19,44 @@ def base(request):
 def logout_usuario(request):
     logout(request)
     return redirect('home')
+
+def lista_usuarios(request):
+    usuarios = Usuario.objects.all()
+    return render(request, "core/lista_usuarios.html", {'usuarios': usuarios})
+
+def update_users(request, id):
+    usuario = get_object_or_404(Usuario,id = id)
+    roles = Usuario.ROL_CHOICES
+    contexto = {'datos':usuario,'roles':roles}
+    return render(request,"core/modificar_usuarios.html",contexto)
+
+def datos_user(request):
+    if request.method == 'POST':
+        id = request.POST.get("id")
+        usuario = get_object_or_404(Usuario,id = id)
+        nombre_u = request.POST.get("nombre")
+        apellido_u = request.POST.get("apellido")
+        email_u = request.POST.get("email")
+        telefono_u = request.POST.get("telefono")
+        rol_u = request.POST.get("rol")
+        foto_u = request.FILES.get("foto", None)
+        
+        usuario.nombre = nombre_u
+        usuario.apellido = apellido_u
+        usuario.email = email_u
+        usuario.telefono = telefono_u
+        usuario.rol = rol_u
+
+        if foto_u:
+            usuario.imagen_perfil = foto_u
+
+        usuario.save()
+    return redirect("lista_usuarios")
+
+def eliminar_usuario(request,id):
+    usuario = get_object_or_404(Usuario,id = id)
+    usuario.delete()
+    return redirect(to="lista_usuarios")
 
 def registro_usuario(request):
     if request.method == "POST":

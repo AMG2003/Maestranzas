@@ -16,12 +16,15 @@
             <div class="col-12 col-md-6 offset-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <h1>Registrar Pieza</h1>
+                        <h1 style="text-align: center;">Registrar Pieza</h1>
                         <form action="" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ form.as_p }}
                             <img id="output_image" src="#" alt="">
-                            <button type="submit">Registrar</button>
+                            <div style="text-align: center;">
+                                <button type="submit">Registrar</button>
+                            </div>
+
                         </form>
                     </div>
                 </div>

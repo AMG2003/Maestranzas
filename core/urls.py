@@ -15,5 +15,9 @@ urlpatterns = [
     path('eliminar_pieza/<int:id>',eliminar_pieza,name="eliminar_pieza"),
     path('pieza/<int:pieza_id>/', views.detalle_pieza, name='detalle_pieza'),
     path('carrito', views.carrito, name="carrito"),
+    path('lista_usuarios/', views.lista_usuarios, name="lista_usuarios"),
+    path('update_users/<int:id>',views.update_users,name="update_users"),
+    path('datos_user/',views.datos_user,name="datos_user"),
+    path('eliminar_usuario/<int:id>',views.eliminar_usuario,name="eliminar_usuario")
 
 ]

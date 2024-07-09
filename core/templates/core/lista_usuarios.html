@@ -1,0 +1,50 @@
+{% extends "core/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} Listado Usuarios {% endblock title %}
+</head>
+
+<body>
+    {% block content %}
+    <h1 style="text-align: center;">Lista de Usuarios</h1>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <th>Nombre:</th>
+            <th>Apellido:</th>
+            <th>Email:</th>
+            <th>Teléfono:</th>
+            <th>Rol:</th>
+            <th>Fecha de Registro:</th>
+            <th>Super Usuario:</th>
+            <th>Foto:</th>
+            <th>Opciones</th>
+        </thead>
+        <tbody>
+            {% for usuarios in usuarios %}
+            <tr>
+                <td>{{usuarios.nombre}}</td>
+                <td>{{usuarios.apellido}}</td>
+                <td>{{usuarios.email}}</td>
+                <td>{{usuarios.telefono}}</td>
+                <td>{{usuarios.rol}}</td>
+                <td>{{usuarios.fecha_registro}}</td>
+                <td>{{usuarios.is_superuser}}</td>
+                <td>{{usuarios.imagen_perfil}}</td>
+                <td>
+                    <a href="{% url 'update_users' usuarios.id %}" class="btn btn-primary">Modificar</a>
+                    <a href="{% url 'eliminar_usuario' usuarios.id %}" class="btn btn-danger">Eliminar</a>
+                </td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endblock content %}
+</body>
+
+</html>
