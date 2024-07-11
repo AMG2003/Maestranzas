@@ -12,6 +12,7 @@ urlpatterns = [
     path('registrar_pieza', views.registrar_pieza, name="registrar_pieza"),
     path('lista_piezas/', views.lista_piezas,name="lista_piezas"),
     path('piezas/',piezas, name="piezas"),
+    path('modificar_pieza/<int:pieza_id>/',views.modificar_pieza,name="modificar_pieza"),
     path('eliminar_pieza/<int:id>',eliminar_pieza,name="eliminar_pieza"),
     path('pieza/<int:pieza_id>/', views.detalle_pieza, name='detalle_pieza'),
     path('carrito', views.carrito, name="carrito"),

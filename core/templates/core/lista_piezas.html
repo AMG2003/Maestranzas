@@ -13,9 +13,17 @@
 <body>
     {% block content %}
     <h1 style="text-align: center;">Lista de Piezas</h1>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+        {{ message }}
+        
+    </div>
+    {% endfor %}
+    {% endif %}
     <table class="table table-striped">
-        <thead>
-            <th>ID</th>
+        <thead class="thead-dark">
+            <th>ID:</th>
             <th>Imagen:</th>
             <th>Descripción:</th>
             <th>Número de Serie:</th>
@@ -24,6 +32,8 @@
             <th>Cantidad Mínima</th>
             <th>Precio Unitario:</th>
             <th>Fecha de Registro:</th>
+            <th>Categoría:</th>
+            <th>Opciones:</th>
 
         </thead>
 
@@ -39,11 +49,11 @@
                 <td>{{ pieza.cantidad_minima|intcomma }}</td>
                 <td>$ {{ pieza.precio_unitario|floatformat:"0"|intcomma }}</td>
                 <td>{{ pieza.fecha_registro }}</td>
-                <td>
-                    <a href="" class="btn btn-primary">Modificar</a>
-                    <a href="{% url 'eliminar_pieza' pieza.id %}" class="btn btn-danger">Eliminar</a>
+                <td>{{ pieza.categoria_producto }}</td>
+                <td style="padding: 10px;">
+                  <a href="{% url 'modificar_pieza' pieza.id %}" class="btn btn-primary">Modificar</a>
+                  <a href="{% url 'eliminar_pieza' pieza.id %}" class="btn btn-danger">Eliminar</a>
                 </td>
-
             </tr>
 
 

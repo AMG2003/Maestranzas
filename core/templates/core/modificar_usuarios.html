@@ -11,6 +11,7 @@
 
 <body>
     {% block content %}
+
     <div class="container" style="padding: 15px;">
         <a href="{% url 'lista_usuarios' %}"><i class="bi bi-arrow-left-circle"></i></a>
         <div class="row justify-content-center">
@@ -25,25 +26,27 @@
                     <input type="hidden" name="id" value="{{ datos.id }}">
                     <div>
                         <label for="">Nombre:</label>
-                        <input class="form-control" id="nombre" value="{{ datos.nombre }}" type="text" name="nombre" maxlength="25">
+                        <input class="form-control" id="nombre" value="{{ datos.nombre }}" type="text" name="nombre"
+                            maxlength="25">
                     </div>
                     <div>
                         <label for="">Apellido:</label>
-                        <input class="form-control" id="apellido" value="{{ datos.apellido }}" type="text" maxlength="25"
-                            name="apellido">
+                        <input class="form-control" id="apellido" value="{{ datos.apellido }}" type="text"
+                            maxlength="25" name="apellido">
                     </div>
                     <div>
                         <label for="">Email:</label>
-                        <input class="form-control" id="email" value="{{ datos.email }}" type="email" name="email" maxlength="25">
+                        <input class="form-control" id="email" value="{{ datos.email }}" type="email" name="email"
+                            maxlength="25">
                     </div>
                     <div>
                         <label for="">Teléfono:</label>
-                        <input class="form-control" id="telefono" value="{{ datos.telefono }}" type="numeric" maxlength="9"
-                            name="telefono">
+                        <input class="form-control" id="telefono" value="{{ datos.telefono }}" type="numeric"
+                            maxlength="9" name="telefono">
                     </div>
                     <div>
                         <label for="rol">Rol:</label> <br>
-                        <select id="rol" name="rol">
+                        <select id="rol" name="rol" class="form-control">
                             {% for valor, nombre in roles %}
 
                             <option value="{{ valor }}" {% if datos.rol == valor %}selected{% endif %}>{{ nombre }}
@@ -52,11 +55,13 @@
                         </select>
                     </div>
                     <div>
-                        <label for="">Foto:</label>
+                        <label for="imagen_perfil">Foto:</label>
                         <input class="form-control" id="foto" type="file" name="foto">
+                        <img src="{{datos.imagen_perfil.url}}" alt="Sin Imagen" width="100%">
                     </div>
+
                     <div style="padding: 10px; text-align: center;">
-                        <button type="submit">Modificar</button>
+                        <button type="submit">Guardar Cambios</button>
                     </div>
 
                 </form>

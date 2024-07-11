@@ -32,7 +32,10 @@
 
 
                         <li class="list-group-item">Precio Unitario: $ {{ pieza.precio_unitario|floatformat:"0"|intcomma}}</li>
+                        
+                        <li class="list-group-item">Categoría: {{ pieza.categoria_producto }}</li>
                     </ul>
+                    
                     <div class="card-body" style="text-align: center; padding: 10px;">
                         <a href="{% url 'detalle_pieza' pieza.id %} " class="btn btn-primary">Ver Detalles</a>
                         <a href="{% url 'carro:agregar' pieza.id %}" class="btn btn-primary">Agregar al Carrito</a>
