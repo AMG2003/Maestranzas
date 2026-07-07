@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-n$#-&)375y1n+qc!116ahoql*tgwr%h8&#z-*w3m=ks+@om2+2
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['maestranzas-production.up.railway.app']
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
